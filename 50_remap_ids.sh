@@ -76,6 +76,5 @@ check_env_vars "$@"
 update_users "$UMAP"
 update_groups "$GMAP"
 
-chmod a+r /files/sample.conf
 chmod a+x /files/monitor.py
 chmod +x /files/runas.sh
