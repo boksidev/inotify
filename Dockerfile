@@ -2,9 +2,7 @@ FROM alpine:3.14
 
 ENV TERM=xterm-256color
 
-RUN true && \
-  \
-  echo "http://dl-cdn.alpinelinux.org/alpine/v3.14/main" >> /etc/apk/repositories && \
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.14/main" >> /etc/apk/repositories && \
   apk --update upgrade && \
   \
   # Basics, including runit
@@ -12,6 +10,7 @@ RUN true && \
   \
   # Needed by our code
   apk add --no-cache python3 py3-pip icu-libs shadow && \
+  pip install --upgrade pip && \
   pip install watchdog && \
   wget https://raw.githubusercontent.com/phusion/baseimage-docker/9f998e1a09bdcb228af03595092dbc462f1062d0/image/bin/setuser -O /sbin/setuser && \
   chmod +x /sbin/setuser && \
@@ -42,9 +41,12 @@ ENV LC_ALL en_US.UTF-8
 ENV UMAP ""
 ENV GMAP ""
 
-COPY monitor.py runas.sh /files/
+COPY runas.sh /files/
 # Make sure it's readable by $UID
 RUN chmod a+rwX /files
+
+# NOTE: Add monitor to site packages
+COPY monitor /usr/lib/python3.9/site-packages/monitor
 
 # run-parts ignores files with "." in them
 ADD 50_remap_ids.sh /etc/run_once/50_remap_ids
