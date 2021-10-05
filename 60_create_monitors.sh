@@ -6,7 +6,7 @@ function ts {
 
 echo "$(ts) Starting master controller"
 
-readarray -t CONFIG_FILES < <(ls /config/*.conf)
+readarray -t CONFIG_FILES < <(ls /config/*.ini)
 
 # If there is no config file copy the default one
 if [[ "$CONFIG_FILES" == "" ]]
