@@ -28,7 +28,7 @@ do
   cat > /etc/service/$FILEBASE/run <<EOF
 #!/bin/bash
 
-/files/monitor.py "$CONFIG_FILE"
+python3 -m monitor "$CONFIG_FILE"
 EOF
 
   chmod a+x /etc/service/$FILEBASE/run
