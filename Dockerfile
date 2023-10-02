@@ -46,7 +46,7 @@ COPY runas.sh /files/
 RUN chmod a+rwX /files
 
 # NOTE: Add monitor to site packages
-COPY monitor /usr/lib/python3.9/site-packages/monitor
+COPY monitor /usr/lib/python3.11/site-packages/monitor
 
 # run-parts ignores files with "." in them
 ADD 50_remap_ids.sh /etc/run_once/50_remap_ids
